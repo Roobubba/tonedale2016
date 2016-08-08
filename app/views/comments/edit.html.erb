@@ -1,0 +1,7 @@
+<%= render 'shared/page_title', title: "Edit Comment for Photo: " + @photo.title %>
+
+  <div class="show_recipe">
+    <%= image_tag(@photo.picture.url, class: "gravatar img-responsive") if @photo.picture? %>
+  </div>
+
+<%= render 'form' %>

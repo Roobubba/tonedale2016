@@ -1,0 +1,12 @@
+<%= render 'shared/errors', obj: @comment %>
+
+  <div class="row">
+    <div class="well col-md-8 col-md-offset-2">
+      <%= form_for [@photo, @comment]  do |f| %>
+      <%= f.label "Add comment:" %>
+      <%= f.text_area :body %>
+
+      <%= f.submit(@comment.new_record? ? 'Create Comment' : 'Edit Comment', class: "btn btn-success") %>
+      <% end %>
+    </div>
+  </div>

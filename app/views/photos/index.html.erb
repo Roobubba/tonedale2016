@@ -1,0 +1,68 @@
+<%= render 'shared/page_title', title: "All Photos" %>
+
+<ul class="nav nav-tabs">
+  <li class='active'>
+    <%= link_to "Photos", photos_path %>
+  </li>
+  <li>
+    <%= link_to "Users", users_path %>
+  </li>
+</ul>
+
+<%= will_paginate %>
+<br>
+
+<% @photos.each do |photo| %>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2">
+        <section class="chef_info center">
+          <%= link_to gravatar_for(photo.user, size: 100), user_path(photo.user) %>
+          <h5>User name: <%= photo.user.username %></h5>
+        </section>
+      </div>
+      <div class="col-md-6 well">
+        <h4><%= link_to photo.title, photo_path(photo) %></h4>
+        <p><%= photo.description %></p>
+        <% if photo.tags.any? %>
+        <p>Tags: 
+          <% photo.tags.each do |tag| %>
+          <%= link_to tag.name, tag_path(tag) %>
+          <% end %>
+        </p>
+        <% end %>        
+        <p>
+          <span class='quiet'><small>First posted <%= time_ago_in_words(photo.created_at) %> ago</small></span>
+          <% if photo.created_at != photo.updated_at %>
+          <span class='quiet'><small> (Last edited <%= time_ago_in_words(photo.updated_at) %> ago)</small></span>
+          <% else %>
+          <% end %>
+        </p>
+        <div class="col-xs-6 text-left nopad">
+          Comments: 
+          <% if photo.num_comments > 0 %>
+            <%= link_to photo.num_comments, photo_comments_path(photo) %>
+          <% else %>
+          0
+          <% end %>
+        </div>
+        
+        <div class="col-xs-6 text-right nopad">
+          <%= link_to like_photo_path(photo, like: true), method: :post do %>
+            <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp<%= photo.thumbs_up_total %>
+          <% end %>
+          &nbsp&nbsp&nbsp&nbsp
+          <%= link_to like_photo_path(photo, like: false), method: :post do %>
+            <i class="glyphicon glyphicon-thumbs-down"></i>&nbsp<%= photo.thumbs_down_total %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <%= link_to image_tag(photo.picture.url, size: "250x150", class: "gravatar"), photo_path(photo) if photo.picture? %>
+      </div>
+    </div>
+    <hr/>
+  </div>
+<% end %>
+
+<%= will_paginate %>

@@ -1,0 +1,18 @@
+<%= render 'shared/page_title', title: 'Comment by ' + @comment.user.username + ' for ' + @comment.photo.title %>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <section class="chef_info center">
+        <%= link_to gravatar_for(@comment.user, size: 100), user_path(@comment.user) %>
+        <h5>User name: <%= @comment.user.username %></h5>
+      </section>
+    </div>
+    <div class="col-md-6 well">
+      <h4><%= link_to @comment.photo.title, photo_path(@comment.photo) %></h4>
+      <p><%= simple_format(@comment.body) %></p>
+    </div>
+  </div>
+</div>
+
+<%= render 'shared/return_buttons' %>

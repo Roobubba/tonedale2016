@@ -1,0 +1,27 @@
+<div class="center jumbotron">
+  <h1>Tone Dale 2016 Photo Gallery</h1>
+  <h1>Westwood, Houghton and Brown Families</h1>
+  <h2>Sign up here to view the photos!</h2>
+  <%= link_to 'Register', register_path, class: "btn btn-lg btn-success" %>
+</div>
+
+<div class="row">
+  <div class="col-lg-4 col-lg-offset-1 text-center">
+    <h3 class="midrow">
+      View photos as guest user
+    </h3>
+    <h2 class="midrow">
+      Browse photos as a guest and sign up later<br><br>
+    </h2>
+    <p><%= link_to "Browse Photos as guest", photos_path, class: "btn btn-warning" %></p>
+  </div>
+    <div class="col-lg-4 col-lg-offset-2  text-center">
+    <h3 class="midrow">
+      Sign in to your profile
+    </h3>
+    <h2 class="midrow">
+      Add/update your photos, view photos from other users, like/dislike and post comments
+    </h2>
+    <p><%= link_to "Log In", login_path, class: "btn btn-success" %></p>
+  </div>
+</div>

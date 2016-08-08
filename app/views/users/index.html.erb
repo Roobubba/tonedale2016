@@ -1,0 +1,30 @@
+<%= render 'shared/page_title', title: "All Users" %>
+
+<ul class="nav nav-tabs">
+  <li>
+    <%= link_to "Photos", photos_path %>
+  </li>
+  <li class='active'>
+    <%= link_to "Users", users_path %>
+  </li>
+</ul>
+
+<%= will_paginate %>
+
+  <% @users.each do |user| %>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 center">
+    
+          <br>
+            <%= link_to gravatar_for(user, size: 200), user_path(user) %>
+              <p>
+                <h5>User name: <%= user.username %></h5>
+              </p>
+    
+        </div>
+      </div>
+    </div>
+  <% end %>
+<%= will_paginate %>
+
