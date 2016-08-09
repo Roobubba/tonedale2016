@@ -17,7 +17,9 @@
       
       <span class="picture">
         <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+        <!--<%# if f.object.picture? %><%#= image_tag f.object.picture.thumb.url %><p class="checkbox inline left"><%#= f.check_box :remove_picture %> Remove Picture </p><%# end %> -->
       </span>
+      
       
       <%= f.submit(@photo.new_record? ? 'Upload Photo' : 'Edit Photo', class: "btn btn-success") %>
       <% end %>

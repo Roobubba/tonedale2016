@@ -62,7 +62,7 @@ class PhotosController < ApplicationController
 
   private
     def photo_params
-      params.require(:photo).permit(:title, :description, :picture, tag_ids: [])
+      params.require(:photo).permit(:title, :description, :picture, :remove_picture, tag_ids: [])
     end
   
     def set_photo
