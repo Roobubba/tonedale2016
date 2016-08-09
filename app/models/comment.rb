@@ -7,6 +7,6 @@ class Comment < ActiveRecord::Base
   validates :body, presence: true, length: { minimum: 3, maximum: 250 }
   default_scope -> { order(updated_at: :desc) }
   
-  validates_uniqueness_of :user, scope: :photo
+  #validates_uniqueness_of :user, scope: :photo
 
 end

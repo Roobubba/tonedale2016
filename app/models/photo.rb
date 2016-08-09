@@ -29,10 +29,10 @@ class Photo < ActiveRecord::Base
     self.comments.size
   end
   
-  def already_commented?(user)
-    checkuser = Comment.find_by(user_id: user.id, photo_id: self.id)
-    !!checkuser
-  end
+  #def already_commented?(user)
+  #  checkuser = Comment.find_by(user_id: user.id, photo_id: self.id)
+  #  !!checkuser
+  #end
   
   private
     def picture_size

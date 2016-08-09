@@ -1,4 +1,4 @@
-<%= render 'shared/page_title', title: "Photos tagged by: " + @tag.name %>
+<%= render 'shared/page_title', title: "Photos with tag: " + @tag.name %>
 
 <ul class="nav nav-tabs">
   <li class='active'>
@@ -14,44 +14,52 @@
 <% @tag.photos.each do |photo| %>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-2">
-        <section class="chef_info center">
-          <%= link_to gravatar_for(photo.user, size: 100), user_path(photo.user) %>
-          <h5>User name: <%= photo.user.username %></h5>
-        </section>
-      </div>
-      <div class="col-md-6 well">
-        <h4><%= link_to photo.title, photo_path(photo) %></h4>
-        <p><%= photo.description %></p>
-        <p>Tags:
-          <% photo.tags.each do |tag| %>
-          <%= link_to tag.name, tag_path(tag) %>
-          <% end %>
-        </p>
-        
-        <p>
-          <span class='quiet'><small>First posted <%= time_ago_in_words(photo.created_at) %> ago</small></span>
-          <% if photo.created_at != photo.updated_at %>
-          <span class='quiet'><small> (Last edited <%= time_ago_in_words(photo.updated_at) %> ago)</small></span>
+      <div class="well col-xs-10 col-xs-offset-1">
+        <div class="col-sm-12 col-md-4 center">
+          <%= link_to image_tag(photo.picture.middle.url, class: "gravatar"), photo_path(photo) if photo.picture? %>
+        </div>
+        <div class="col-xs-12 col-md-5 col-md-offset-1">
+          <h3><%= link_to photo.title, photo_path(photo) %></h3>
+          <p>Uploaded by: <%= link_to photo.user.username, user_path(photo.user) %></p> 
+            <% if !photo.description.blank? %>
+            <p>Description: <%= photo.description %></p>
+            <% end %>
+          <% if photo.tags.any? %>
+          <p>Tags: 
+            <% photo.tags.each do |tag| %>
+            <%= link_to tag.name, tag_path(tag) %>
+            <% end %>
+          </p>
+          <% end %> 
+          <p>
+            <span class='quiet'><small>First posted <%= time_ago_in_words(photo.created_at) %> ago</small></span>
+            <% if photo.created_at != photo.updated_at %>
+            <span class='quiet'><small> (Last edited <%= time_ago_in_words(photo.updated_at) %> ago)</small></span>
+            <% else %>
+            <% end %>
+          </p>
+        <div class="col-xs-6 text-left nopad">
+          Comments: 
+          <% if photo.num_comments > 0 %>
+            <%= link_to photo.num_comments, photo_comments_path(photo) %>
           <% else %>
+          0
           <% end %>
-        </p>
+        </div>
+        </div>
         <div class="pull-right">
           <%= link_to like_photo_path(photo, like: true), method: :post do %>
-            <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp<%= photo.thumbs_up_total %>
+          <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp<%= photo.thumbs_up_total %>
           <% end %>
           &nbsp&nbsp&nbsp&nbsp
           <%= link_to like_photo_path(photo, like: false), method: :post do %>
-            <i class="glyphicon glyphicon-thumbs-down"></i>&nbsp<%= photo.thumbs_down_total %>
+          <i class="glyphicon glyphicon-thumbs-down"></i>&nbsp<%= photo.thumbs_down_total %>
           <% end %>
         </div>
       </div>
-      <div class="col-md-4">
-        <%= link_to image_tag(photo.picture.middle.url, class: "gravatar"), photo_path(photo) if photo.picture? %>
-      </div>
     </div>
-    <hr/>
-  </div>
+  <hr/>
+</div>
 <% end %>
 
 <%= will_paginate @photos %>

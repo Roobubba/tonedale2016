@@ -29,7 +29,7 @@
     <div class="col-md-8 col-xs-12">
       <p><h3><%= @photo.title %></h3></p>
       <div class="show_recipe">
-        <%= image_tag(@photo.picture.url, class: "gravatar img-responsive") if @photo.picture? %>
+        <%= image_tag(@photo.picture.large.url, class: "gravatar img-responsive") if @photo.picture? %>
       </div>
 
       <div class="well">
@@ -68,7 +68,7 @@
       <%= link_to photo_comments_path(@photo) do %>
         <h3>Comments:</h3>
       <% end %>
-      <% if logged_in? and !@photo.already_commented?(current_user) %>
+      <% if logged_in? %>
         <%= link_to "Add Comment", new_photo_comment_path(photo_id: @photo.id), class: "btn btn-success" %>
       <% end %>
     </div>

@@ -1,6 +1,6 @@
 class PhotosController < ApplicationController
   
-  before_action :set_photo, only: [:edit, :update, :show, :like, :already_commented?]
+  before_action :set_photo, only: [:edit, :update, :show, :like] #, :already_commented?]
   before_action :require_user, except: [:show, :index]
   before_action :require_same_user, only: [:edit, :update]
   before_action :admin_user, only: :destroy
