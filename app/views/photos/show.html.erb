@@ -29,7 +29,7 @@
     <div class="col-md-8 col-xs-12">
       <p><h3><%= @photo.title %></h3></p>
       <div class="show_recipe">
-        <%= image_tag(@photo.picture.large.url, class: "gravatar img-responsive") if @photo.picture? %>
+        <%= link_to image_tag(@photo.picture.large.url, class: "gravatar img-responsive"), @photo.picture.url if @photo.picture? %>
       </div>
 
       <div class="well">
@@ -48,7 +48,6 @@
           </strong>
         </p>
         <%= simple_format(@photo.description) %>
-        <p><strong><%= link_to "View full quality image", @photo.picture.url %></strong></p>
         <div class="pull-right">
           <%= link_to like_photo_path(@photo, like: true), method: :post do %>
           <i class="glyphicon glyphicon-thumbs-up"></i>
