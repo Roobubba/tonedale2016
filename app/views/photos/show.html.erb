@@ -48,6 +48,7 @@
           </strong>
         </p>
         <%= simple_format(@photo.description) %>
+        <p><strong><%= link_to "View full quality image", @photo.picture.url %></strong></p>
         <div class="pull-right">
           <%= link_to like_photo_path(@photo, like: true), method: :post do %>
           <i class="glyphicon glyphicon-thumbs-up"></i>
