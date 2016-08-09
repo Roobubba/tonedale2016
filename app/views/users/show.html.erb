@@ -17,24 +17,29 @@
 
   <% @photos.each do |photo| %>
     <div class="row">
-      <div class="well col-md-6 col-md-offset-3">
-      <h4><%= link_to photo.title, photo_path(photo) %></h4>
-      <p><%= photo.description %></p>
-      <p>
-        <span class='quiet'><small>First posted <%= time_ago_in_words(photo.created_at) %> ago</small></span>
-        <% if photo.created_at != photo.updated_at %>
-        <span class='quiet'><small> (Last edited <%= time_ago_in_words(photo.updated_at) %> ago)</small></span>
-        <% else %>
-        <% end %>
-      </p>
-      <div class="pull-right">
-        <%= link_to like_photo_path(photo, like: true), method: :post do %>
-        <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp<%= photo.thumbs_up_total %>
-        <% end %>
-        &nbsp&nbsp&nbsp&nbsp
-        <%= link_to like_photo_path(photo, like: false), method: :post do %>
-        <i class="glyphicon glyphicon-thumbs-down"></i>&nbsp<%= photo.thumbs_down_total %>
-        <% end %>
+      <div class="well col-md-8 col-md-offset-2">
+        <div class="col-md-2">
+          <%= link_to image_tag(photo.picture.middle.url, class: "gravatar"), photo_path(photo) if photo.picture? %>
+        </div>
+        <div class="col-md-6 col-md-offset-2">
+        <h4><%= link_to photo.title, photo_path(photo) %></h4>
+        <p><%= photo.description %></p>
+        <p>
+          <span class='quiet'><small>First posted <%= time_ago_in_words(photo.created_at) %> ago</small></span>
+          <% if photo.created_at != photo.updated_at %>
+          <span class='quiet'><small> (Last edited <%= time_ago_in_words(photo.updated_at) %> ago)</small></span>
+          <% else %>
+          <% end %>
+        </p>
+        <div class="pull-right">
+          <%= link_to like_photo_path(photo, like: true), method: :post do %>
+          <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp<%= photo.thumbs_up_total %>
+          <% end %>
+          &nbsp&nbsp&nbsp&nbsp
+          <%= link_to like_photo_path(photo, like: false), method: :post do %>
+          <i class="glyphicon glyphicon-thumbs-down"></i>&nbsp<%= photo.thumbs_down_total %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

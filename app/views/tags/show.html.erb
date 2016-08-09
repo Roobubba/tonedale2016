@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="col-md-4">
-        <%= link_to image_tag(photo.picture.url, size: "250x150", class: "gravatar"), photo_path(photo) if photo.picture? %>
+        <%= link_to image_tag(photo.picture.middle.url, class: "gravatar"), photo_path(photo) if photo.picture? %>
       </div>
     </div>
     <hr/>
